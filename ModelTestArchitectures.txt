@@ -1,0 +1,100 @@
+Model Test Architectures
+
+Test 1: 1.01%
+model = Sequential()
+model.add(Conv2D(conv_L1_features, 3, strides = 1, padding = 'same',
+                activation = 'relu', kernel_regularizer = l2(0.01),
+                input_shape=model_input_size))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Conv2D(conv_L2_features, 2, strides = 1, padding = 'same',
+                activation = 'relu', kernel_regularizer = l2(0.01)))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Dropout(0.2))
+model.add(Conv2D(conv_L3_features, 2, strides = 1, padding = 'same',
+                activation = 'relu', kernel_regularizer = l2(0.01)))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Dropout(0.3))
+model.add(Conv2D(conv_L4_features, 2, strides = 1, padding = 'same',
+                activation = 'relu', kernel_regularizer = l2(0.01)))
+model.add(GlobalAveragePooling2D())
+model.add(Dropout(0.4))
+# Fully Connected Network
+model.add(Dense(dense_L1_features, activation = 'relu'))
+model.add(Dropout(0.2))
+model.add(Dense(num_model_outputs, activation = 'softmax'))
+model.summary()
+
+
+Model 2 1.5%
+# Define the model structure
+model_input_size = train_tensors.shape[1:]
+conv_L1_features = 64
+conv_L2_features = 128
+conv_L3_features = 256
+conv_L4_features = 512
+max_pool_size = 2
+
+# Fully Connected Parameters
+dense_L1_features = 128
+dense_L2_features = 64
+
+num_model_outputs = train_targets.shape[1]
+
+model = Sequential()
+model.add(Conv2D(conv_L1_features, 3, strides = 1, padding = 'same',
+                activation = 'relu',
+                input_shape=model_input_size))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Conv2D(conv_L2_features, 2, strides = 1, padding = 'same',
+                activation = 'relu'))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Dropout(0.2))
+model.add(Conv2D(conv_L3_features, 2, strides = 1, padding = 'same',
+                activation = 'relu'))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Dropout(0.3))
+model.add(Conv2D(conv_L4_features, 2, strides = 1, padding = 'same',
+                activation = 'relu'))
+model.add(GlobalAveragePooling2D())
+model.add(Dropout(0.4))
+# Fully Connected Network
+model.add(Dense(dense_L1_features, activation = 'relu'))
+model.add(Dropout(0.2))
+model.add(Dense(dense_L2_features, activation = 'relu'))
+model.add(Dropout(0.2))
+model.add(Dense(num_model_outputs, activation = 'softmax'))
+model.summary()
+
+Model 3: 4.5 %
+# Define the model structure
+model_input_size = train_tensors.shape[1:]
+conv_L1_features = 64
+conv_L2_features = 128
+conv_L3_features = 256
+max_pool_size = 2
+
+# Fully Connected Parameters
+dense_L1_features = 128
+dense_L2_features = 32
+
+num_model_outputs = train_targets.shape[1]
+
+model = Sequential()
+model.add(Conv2D(conv_L1_features, 3, strides = 1, padding = 'same',
+                activation = 'relu',
+                input_shape=model_input_size))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Conv2D(conv_L2_features, 2, strides = 1, padding = 'same',
+                activation = 'relu'))
+model.add(MaxPooling2D(max_pool_size))
+model.add(Dropout(0.2))
+model.add(Conv2D(conv_L3_features, 2, strides = 1, padding = 'same',
+                activation = 'relu'))
+model.add(MaxPooling2D(max_pool_size))
+model.add(GlobalAveragePooling2D())
+model.add(Dropout(0.4))
+# Fully Connected Network
+model.add(Dense(dense_L1_features, activation = 'relu'))
+model.add(Dropout(0.2))
+model.add(Dense(num_model_outputs, activation = 'softmax'))
+model.summary()
